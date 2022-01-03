@@ -23,8 +23,9 @@ john hashes.txt --format=sha512crypt
 
 ![image3](https://raw.githubusercontent.com/ricardojoserf/ricardojoserf.github.io/master/images/SSSD-creds/image3.png)
 
-Sources:
+
+### Sources
+
+I create the script after reading this presentation by Tim (Wadhwa-)Brown:
 
 - [Where 2 worlds collide - Bringing Mimikatz et al to UNIX by Tim (Wadhwa-)Brown](https://i.blackhat.com/eu-18/Wed-Dec-5/eu-18-Wadhwa-Brown-Where-2-Worlds-Collide-Bringing-Mimikatz-et-al-to-UNIX.pdf)
-- 
-- [Metasploit module](https://github.com/CiscoCXSecurity/linikatz/blob/master/red/metasploit-framework/unix_cached_ad_hashes.rb)
