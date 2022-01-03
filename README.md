@@ -26,6 +26,4 @@ john hashes.txt --format=sha512crypt
 
 ### Sources
 
-I create the script after reading this presentation by Tim (Wadhwa-)Brown:
-
-- [Where 2 worlds collide - Bringing Mimikatz et al to UNIX by Tim (Wadhwa-)Brown](https://i.blackhat.com/eu-18/Wed-Dec-5/eu-18-Wadhwa-Brown-Where-2-Worlds-Collide-Bringing-Mimikatz-et-al-to-UNIX.pdf)
+I created the script after reading this presentation by Tim (Wadhwa-)Brown: [Where 2 worlds collide - Bringing Mimikatz et al to UNIX](https://i.blackhat.com/eu-18/Wed-Dec-5/eu-18-Wadhwa-Brown-Where-2-Worlds-Collide-Bringing-Mimikatz-et-al-to-UNIX.pdf)
