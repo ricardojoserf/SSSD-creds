@@ -6,12 +6,12 @@ Using this bash script it is possible to extract cached active directory credent
 bash analyze.sh [$path]
 ```
 
-Without a path argument, the default SSSD path "/var/lib/sss/db/" is used. If tdbdump is not installed, you can install it ("apt install tdb-tools") or exfiltrate these files:
+Without a path argument, the default SSSD path ``/var/lib/sss/db/`` is used. If tdbdump is not installed, you can install it with ``apt install tdb-tools`` or exfiltrate the files to a system where tdbdump is installed.
 
 ![image1](https://raw.githubusercontent.com/ricardojoserf/ricardojoserf.github.io/master/images/SSSD-creds/image1.png)
 
 
-In a system with tdbdump installed the script extracts the cached accounts and hashes, dumping the results to the file "hashes.txt"
+On a system with tdbdump installed, the script extracts the cached accounts and hashes, dumping the results to the file ``hashes.txt``.
 
 ![image2](https://raw.githubusercontent.com/ricardojoserf/ricardojoserf.github.io/master/images/SSSD-creds/image2.png)
 
@@ -26,4 +26,4 @@ john hashes.txt --format=sha512crypt
 
 ### Sources
 
-I created this script after reading this presentation by Tim (Wadhwa-)Brown: [Where 2 worlds collide - Bringing Mimikatz et al to UNIX](https://i.blackhat.com/eu-18/Wed-Dec-5/eu-18-Wadhwa-Brown-Where-2-Worlds-Collide-Bringing-Mimikatz-et-al-to-UNIX.pdf)
+I created this script after reading this presentation by Tim (Wadhwa-) Brown: [Where 2 worlds collide - Bringing Mimikatz et al to UNIX](https://i.blackhat.com/eu-18/Wed-Dec-5/eu-18-Wadhwa-Brown-Where-2-Worlds-Collide-Bringing-Mimikatz-et-al-to-UNIX.pdf)
