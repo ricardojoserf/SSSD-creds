@@ -14,7 +14,7 @@ else
 	echo ""
 fi
 
-for db_ in $(ls $location_/cache_*ldb)
+for db_ in $(ls $location_/*ldb)
 do
 	echo "Database file:" $(echo $db_)
 	if [ "$analyze" -eq "1" ]; then
@@ -22,7 +22,7 @@ do
 		for account_ in $(tdbdump $db_ | grep cachedPassword | cut -d "=" -f 3 | cut -d "," -f 1 | sort -u)
 		do 
 			echo "Account: " $account_
-			hash_="\$6\$"$(tdbdump $db_ | grep cachedPassword | grep $account_ | tr "=" "\n" | grep cachedPassword | sed "s/\\\00g//g" | sed 's/\\00//g' | sed 's/\\01//g' | awk -F 'cachedPassword' '{print $3}' | awk -F 'lastCachedPasswordChange' '{print $1 }')
+			hash_=$(tdbdump $db_ | grep cachedPassword | grep $account_ | grep -o "\$6\$.*cachedPassword" | sed "s/cachedPassword//g" | sed "s/\\\00//g")
 			echo "Hash:    " $hash_
 			echo "Adding hash to hashes.txt"
 			echo $account_:$hash_ >> hashes.txt
