@@ -14,19 +14,22 @@ else
 	echo ""
 fi
 
-for db_ in $(ls $location_/cache_*ldb)
+for db_ in $(ls $location_/*ldb)
 do
-	echo "Database file:" $(echo $db_)
+	echo ""
 	if [ "$analyze" -eq "1" ]; then
-		echo "Account hashes: " $(tdbdump $db_ | grep cachedPassword | cut -d "=" -f 3 | cut -d "," -f 1 | sort -u | wc -l)
+		number_of_accounts=$(tdbdump $db_ | grep cachedPassword | cut -d "=" -f 3 | cut -d "," -f 1 | sort -u | wc -l)
+		echo "\e[1;36m### $number_of_accounts hash found in $db_ ###\e[0m"
 		for account_ in $(tdbdump $db_ | grep cachedPassword | cut -d "=" -f 3 | cut -d "," -f 1 | sort -u)
-		do 
-			echo "Account: " $account_
-			hash_="\$6\$"$(tdbdump $db_ | grep cachedPassword | grep $account_ | tr "=" "\n" | grep cachedPassword | sed "s/\\\00g//g" | sed 's/\\00//g' | sed 's/\\01//g' | awk -F 'cachedPassword' '{print $3}' | awk -F 'lastCachedPasswordChange' '{print $1 }')
-			echo "Hash:    " $hash_
-			echo "Adding hash to hashes.txt"
+		do
+			echo "\nAccount:	\e[1;32m$account_\e[0m"
+			hash_=$(tdbdump $db_ | grep cachedPassword | grep $account_ | grep -o "\$6\$.*achedPassword" | awk -F 'Type' '{print $1}' | awk -F 'cachedPassword' '{print $1}' | awk -F 'lastCachedPassword' '{print $1}')
+			echo "Hash:		\e[1;31m$hash_\e[0m"
 			echo $account_:$hash_ >> hashes.txt
 		done
-		echo ""
+		if [ "$number_of_accounts" -gt "0" ]; then
+			echo "\n\e[1m  =====> Adding $db_ hashes to hashes.txt <=====\e[0m\n"
+		fi
 	fi
 done
+echo ""
