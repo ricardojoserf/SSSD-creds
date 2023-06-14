@@ -1,14 +1,14 @@
 # SSSD-creds
 
-Using this bash script, it's possible to extract hashed passwords for Active Directory accounts (of the form SHA-512) when credential caching is enabled in SSSD.
+Using this bash script it is possible to extract Active Directory accounts hashes when credential caching is enabled in SSSD.
 
 ```
 bash analyze.sh [$path]
 ```
 
-Without arguments it takes the default SSSD path "/var/lib/sss/db/" but you can use a different one. If tdbdump is not installed it just lists the ldb files which contain the hashes, you can install it ("apt install tdb-tools") or exfiltrate these files:
+Without input arguments it takes the SSSD default path "/var/lib/sss/db/" but you can use a different one. If tdbdump is not installed it just lists the ldb files which contain the hashes, you can install it ("apt install tdb-tools") or exfiltrate these files:
 
-![image1](https://github.com/4zrm/SSSD-creds/assets/136485331/46ab92f8-1a60-4f4c-bdf5-2f419192dd90)
+![image1](https://raw.githubusercontent.com/ricardojoserf/ricardojoserf.github.io/master/images/SSSD-creds/image1.png)
 
 
 In a system with tdbdump installed the script extracts the cached accounts and hashes, dumping the results to the file "hashes.txt"
@@ -23,12 +23,6 @@ john hashes.txt --format=sha512crypt
 ```
 
 ![image4](https://github.com/4zrm/SSSD-creds/assets/136485331/f8bcc14b-85ec-4a5a-bd43-b011882a6893)
-
-Here, all hashes have been cracked, but some of them have been cracked before.
-However, it's possible to see all cracked passwords with **--show** option.
-
-![image5](https://github.com/4zrm/SSSD-creds/assets/136485331/4e1f485c-4a7d-49d8-810e-09eac7895c92)
-
 
 ### Sources
 
